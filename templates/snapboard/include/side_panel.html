@@ -1,0 +1,55 @@
+{% load i18n %}
+<div class="well">
+    {% if user.is_authenticated %}
+        <p>
+	{# TODO: The next line used to be in a blocktrans before using the url tag #}
+            <div>
+            <a href="{% url snapboard_new_thread %}" class="btn large success">Post Now</a>
+            </div>
+        </p>
+    <ul class="unstyled">
+        <li><a href="{% url snapboard_favorite_index %}"><span>{% trans "Favorites" %}</span></a></li>
+        <li><a href="{% url snapboard_private_index %}"><span>{% trans "Private Posts" %}</span></a></li>
+        <li><a href="{% url snapboard_edit_settings %}">{% trans "Forum Preferences" %}</a></li>
+        <!-- li><a href="{% url snapboard_new_thread %}"><span style="color: red;">{% trans "Start Thread" %}</span></a></li -->
+    </ul>
+    {% else %}
+        <p>{% trans "You are not logged in." %}</p>
+
+        <p>{% trans "You need to have a user account in order to contribute to discussions on this forum." %}</p>
+        <p style="font-size:small"><a href="/accounts/login/">Log In</a> | <a href="/accounts/register/">{% trans "Create an account" %}</a></p>
+    {% endif %}
+</div>
+
+<div class="well">
+    <p><b>{% trans "Available Categories" %}</b></p>
+    <ul class="unstyled">
+      {% for cat in cat_list %}
+      <li><a href="/forums/threads/category/{{ cat.id }}/">{{ cat.label }}</a> - {{ cat.thread_count }}</li>
+      {% endfor %}
+    </ul>
+    </div>
+
+{% if user.is_staff %}
+    <div class="well">
+    <p><b>{% trans "Admin Shortcuts" %}</b></p>
+    <ul class="unstyled">
+        <li><b><a href="/admin/">{% trans "Admin Site" %}</a></b></li>
+        <li><a href="/admin/snapboard/post/?censor__exact=1">{% trans "Censored posts" %}</a></li>
+        <li><a href="/admin/snapboard/abusereport/">{% trans "Abuse Reports" %}</a></li>
+        <li><a href="/admin/snapboard/thread/?csticky__exact=1">{% trans "Category Sticky" %}</a></li>
+        <li><a href="/admin/snapboard/thread/?gsticky__exact=1">{% trans "Global Sticky" %}</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <!-- br />
+    <div class="forummenu">
+    <ul>
+        <li>&#187; <a href="#">Watched Topics<b></a> <br /> <a href="#">(2 new!)</b></a></li>
+        <li>&#187; <a href="#">Private Posts<b></a> <br /> <a href="#">(4 new!)</b></a></li>
+    </ul>
+    </div -->
+    
+{% endif %}

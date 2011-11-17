@@ -1,0 +1,23 @@
+{% extends "snapboard/base_forum.html" %}
+{% load bootstrap_tags %}
+{% load i18n %}
+
+{% block snapboard_main %}
+    {% if user.is_authenticated %}
+    <form action="" method="POST" id="add_post_div">
+        <fieldset>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="actions">
+              <input type="submit" class="btn big primary" value="{% trans "Post" %}" />
+          </div>
+    </fieldset>
+    </form>
+
+    {% else %}
+    <p>{% trans "You must be signed in to start a new discussion." %}</p>
+    {% endif %}
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->

@@ -1,0 +1,52 @@
+{% extends "snapboard/base_forum.html" %}
+{% load i18n pagination_tags %}
+{% load extras %}
+
+{% block snapboard_main %}
+    <div class="page-header">
+    <h1>
+   {{ title }}
+    </h1>
+        {% autopaginate threads user_settings.tpp %}
+        {% paginate %}
+    </div>
+
+    {% if threads %}
+        {% for thread in threads %}
+        <div class="row">
+        <div class="span10">
+            <h3><a href="{% url snapboard_thread thread.id %}">{{ thread.subject }}</a></h3>
+                    {% if thread.gsticky %}
+                    <span class="label success">{% trans "STICKY" %}</span>
+					{% else %}
+					{% if category and thread.csticky %}
+                    <span class="label success">{% trans "STICKY" %}</span>
+					{% endif %}
+                    {% endif %}
+                    {% if thread.closed %}
+                    <span class="label warning">{% trans "CLOSED" %}</span>
+                    {% endif %}
+                    {{ thread.post_count }} {% trans "comments" %}
+                    {% trans "Posted by" %} {{ thread.starter }}
+                    Last updated 
+                    {{ thread.date|timesince }}
+                    {% trans "ago" %}
+                    {% ifnotequal thread.last_poster thread.starter %}
+                
+                {% endifnotequal %}
+                <a href="{% url snapboard_category_thread_index thread.category.id %}">
+                    {{ thread.category }}
+                </a>
+        </div>
+        <div class="span2">
+            RIGHT
+        </div>
+    </div><!-- End Row -->
+        <hr/>
+        {% endfor %}
+        {% paginate %}{# XXX It's inefficient calling that twice for the same result #}
+
+    {% else %}
+        <p>{% trans "No threads are available." %}</p>
+    {% endif %}
+{% endblock %}
