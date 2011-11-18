@@ -28,12 +28,14 @@
                     {% if thread.closed %}
                     <span class="label warning">{% trans "CLOSED" %}</span>
                     {% endif %}
-                    <span>{{ thread.post_count }} {% trans "comments" %}</span>
-                    {% if thread.post_count >= 1 %}
+                    {% with comment_count=thread.post_count|add:-1 %}
+                    <span>{{ comment_count }} comment{{ comment_count|pluralize}}</span>
+                    {% if comment_count >= 1 %}
                     <span>{% trans "Last updated by" %} {{ thread.last_poster }}
                     {% else %}
                     <span>{% trans "Started by" %} {{ thread.starter }}
                     {% endif %}
+                    {% endwith %}
                     {{ thread.date|timesince }} {% trans "ago" %}</span>
                 <span class="right">
                 <a href="{% url snapboard_category_thread_index thread.category.id %}">

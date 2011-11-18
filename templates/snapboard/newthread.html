@@ -3,11 +3,29 @@
 {% load i18n %}
 
 {% block snapboard_main %}
+    {% if form.errors %}
+        <div class="alert-message error">
+            <p>There was an error with your post</p>
+        </div>
+    {% endif %}
     {% if user.is_authenticated %}
     <form action="" method="POST" id="add_post_div">
         <fieldset>
+            <legend>Create a new Post</legend>
             {% csrf_token %}
-            {% bootstrap_form form %}
+            <div class="clearfix{% if form.subject.errors %} error{% endif %}"> <label for="id_subject">Title</label> 
+                <div class="input" id="field_subject">
+                    <input id="id_subject" maxlength="80" type="text" name="subject" class="span8{% if form.subject.errors %} error{% endif %}" /> 
+                    {% if form.subject.errors %}<div class="help-inline">Each post needs a subject.</div>{% endif %}
+                </div>
+            </div>
+            <div class="clearfix{% if form.subject.errors %} error{% endif %}"> <label for="id_post">Content</label> 
+                <div class="input" id="field_post">
+                    <textarea id="id_post" rows="12" name="post" class="span8{% if form.subject.errors %} error{% endif %}"></textarea> 
+                    {% if form.subject.errors %}<div class="help-inline">Each post needs content.</div>{% endif %}
+                </div>
+            </div>
+            {% bootstrap_form form.category %}
             <div class="actions">
               <input type="submit" class="btn big primary" value="{% trans "Post" %}" />
           </div>
