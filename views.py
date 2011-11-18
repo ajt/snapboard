@@ -62,7 +62,7 @@ def snapboard_default_context(request):
 
 
 def user_settings_context(request):
-    return {'user_settings': get_user_settings(request.user)}
+    return {'user_settings': get_user_settings(request.user), 'active':'forums',}
 
 def categories_context(request):
     return {'cat_list': [c for c in Category.objects.all() if c.can_view(request.user)]}

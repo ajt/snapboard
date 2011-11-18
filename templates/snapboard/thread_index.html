@@ -14,8 +14,10 @@
     {% if threads %}
         {% for thread in threads %}
         <div class="row">
-        <div class="span10">
-            <h3><a href="{% url snapboard_thread thread.id %}">{{ thread.subject }}</a></h3>
+        <div class="span12">
+            <div class="post-index">
+                <div class="post-subject"><a href="{% url snapboard_thread thread.id %}">{{ thread.subject }}</a></div>
+                <div class="post-info">
                     {% if thread.gsticky %}
                     <span class="label success">{% trans "STICKY" %}</span>
 					{% else %}
@@ -26,23 +28,22 @@
                     {% if thread.closed %}
                     <span class="label warning">{% trans "CLOSED" %}</span>
                     {% endif %}
-                    {{ thread.post_count }} {% trans "comments" %}
-                    {% trans "Posted by" %} {{ thread.starter }}
-                    Last updated 
-                    {{ thread.date|timesince }}
-                    {% trans "ago" %}
-                    {% ifnotequal thread.last_poster thread.starter %}
-                
-                {% endifnotequal %}
+                    <span>{{ thread.post_count }} {% trans "comments" %}</span>
+                    {% if thread.post_count >= 1 %}
+                    <span>{% trans "Last updated by" %} {{ thread.last_poster }}
+                    {% else %}
+                    <span>{% trans "Started by" %} {{ thread.starter }}
+                    {% endif %}
+                    {{ thread.date|timesince }} {% trans "ago" %}</span>
+                <span class="right">
                 <a href="{% url snapboard_category_thread_index thread.category.id %}">
                     {{ thread.category }}
                 </a>
+            </span>
         </div>
-        <div class="span2">
-            RIGHT
+        </div>
         </div>
     </div><!-- End Row -->
-        <hr/>
         {% endfor %}
         {% paginate %}{# XXX It's inefficient calling that twice for the same result #}
 
