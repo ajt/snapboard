@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-    {% block title %}SNAPBoard{% endblock %}
+{% block title %}<title>{% if thr.subject %}{{ thr.subject }} | {% else %} {% if category %}{{ category }} | {% endif %}{% endif %}CISSP Zone Forums</title>{% endblock %}
     {% block forum_header %}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url snapboard_feeds "latest" %}" />
     {# this is required for some javascript rpc functions #}
