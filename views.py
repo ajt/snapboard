@@ -128,9 +128,9 @@ def rpc(request):
     except KeyError:
         return HttpResponseServerError()
 
-def thread(request, thread_id):
+def thread(request, thread_id, slug):
     try:
-        thr = Thread.view_manager.get(pk=thread_id)
+        thr = Thread.view_manager.get(pk=thread_id, slug=slug)
     except Thread.DoesNotExist:
         raise Http404
 
@@ -286,9 +286,9 @@ def private_index(request):
             context_instance=RequestContext(request, processors=extra_processors))
 private_index = login_required(private_index)
 
-def category_thread_index(request, cat_id):
+def category_thread_index(request, cat_id, slug):
     try:
-        cat = Category.objects.get(pk=cat_id)
+        cat = Category.objects.get(pk=cat_id, slug=slug)
         if not cat.can_read(request.user):
             raise PermissionError
         thread_list = Thread.view_manager.get_category(cat_id)

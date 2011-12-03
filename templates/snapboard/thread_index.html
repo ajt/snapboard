@@ -16,7 +16,7 @@
         <div class="row">
         <div class="span12">
             <div class="post-index">
-                <div class="post-subject"><a href="{% url snapboard_thread thread.id %}">{{ thread.subject }}</a></div>
+                <div class="post-subject"><a href="{% url snapboard_thread thread.id thread.slug %}">{{ thread.subject }}</a></div>
                 <div class="post-info">
                     {% if thread.gsticky %}
                     <span class="label success">{% trans "STICKY" %}</span>
@@ -38,7 +38,7 @@
                     {% endwith %}
                     {{ thread.date|timesince }} {% trans "ago" %}</span>
                 <span class="right">
-                <a href="{% url snapboard_category_thread_index thread.category.id %}">
+                <a href="{% url snapboard_category_thread_index thread.category.id thread.category.slug %}">
                     {{ thread.category }}
                 </a>
             </span>

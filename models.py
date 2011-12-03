@@ -148,6 +148,7 @@ signals.pre_delete.connect(Invitation.notify_cancelled, sender=Invitation)
 class Category(models.Model):
 
     label = models.CharField(max_length=32, verbose_name=_('label'))
+    slug = models.SlugField(max_length=32, verbose_name=_('slug'))
 
     view_perms = models.PositiveSmallIntegerField(_('view permission'),
         choices=PERM_CHOICES, default=ALL,
@@ -240,6 +241,7 @@ class Moderator(models.Model):
 class Thread(models.Model):
     subject = models.CharField(max_length=160, verbose_name=_('subject'))
     category = models.ForeignKey(Category, verbose_name=_('category'))
+    slug = models.SlugField(max_length=160, verbose_name=_('slug'))
 
     closed = models.BooleanField(default=False, verbose_name=_('closed'))
 
