@@ -128,9 +128,10 @@ def rpc(request):
     except KeyError:
         return HttpResponseServerError()
 
-def thread(request, thread_id, slug):
+def thread(request, thread_id, slug, category_slug):
     try:
-        thr = Thread.view_manager.get(pk=thread_id, slug=slug)
+        category = Category.objects.get(slug=category_slug)
+        thr = Thread.view_manager.get(pk=thread_id, slug=slug, category=category)
     except Thread.DoesNotExist:
         raise Http404
 

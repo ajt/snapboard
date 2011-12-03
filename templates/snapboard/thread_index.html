@@ -16,7 +16,7 @@
         <div class="row">
         <div class="span12">
             <div class="post-index">
-                <div class="post-subject"><a href="{% url snapboard_thread thread.id thread.slug %}">{{ thread.subject }}</a></div>
+                <div class="post-subject"><a href="{% url snapboard_thread thread.category.slug thread.id thread.slug  %}">{{ thread.subject }}</a></div>
                 <div class="post-info">
                     {% if thread.gsticky %}
                     <span class="label success">{% trans "STICKY" %}</span>
