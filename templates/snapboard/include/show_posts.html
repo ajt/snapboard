@@ -77,10 +77,10 @@
                 {{ post.text|striptags|render_post|safe }}
             </div>
             {% if post.previous %}
-            <span id="post_revision_links{{ post.id }}" class="post_menuleft">
+            <div id="post_revision_links{{ post.id }}" class="post_menuleft">
                 <a href="#snap_post_view{{ post.id }}" onclick="revision('{{ post.id }}','{{ post.previous.id }}');">&#171; {% trans "previous" %}</a>
                 <b style="color: #c00">{% trans "This message has been revised" %}</b>
-            </span>
+            </div>
 
             {% endif %}
 
