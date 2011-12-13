@@ -33,10 +33,10 @@
                 {% endfor %}
             {% endif %}
 
-        <span class="popup" title="Author">{{ post.user }}</span>
-            <span class="timesince">
+        <div class="post_author">{{ post.user }}</div>
+            <div class="timesince">
                 <span class="datetime">{{ post.date|date:"r T" }}<span class="timestamp">{{ post.date|timestamp }}</span></span>
-            </span>
+            </div>
             <span class="post_summary" style="display:none;" id="snap_post_sum{{ post.id }}">:
                 {{ post.text|post_summary:"30"|safe }}
             </span>
