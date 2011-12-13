@@ -1,8 +1,15 @@
 {% load i18n %}
 {% load extras %}
+{% load avatar_tags %}
 <div>
 {% for post in posts %}
     <div id="snap_post{{ post.id }}">
+    <div class="comment-avatar">
+        <a href="#snap_post{{ post.id }}" onclick="toggle_post('{{ post.id }}');">
+        <img src="{% avatar_url post.user 40 %}" alt="{{ comment.user }}'s avatar" >
+        </a>
+    </div>
+
 
         {% if post.censor %}
             <div class="post_censored">
@@ -19,18 +26,14 @@
             {% if post.avatar %}
                 <img src="{{ SNAP_MEDIA_PREFIX }}/{{ post.avatar }}" />
             {% endif %}
-            <b>
-                <a href="#snap_post{{ post.id }}" onclick="toggle_post('{{ post.id }}');">
-                    <span class="popup" title="Author">{{ post.user }}</span>
-                </a>
-            </b>
-
+            
             {% if post.private.all %}
                 {% trans "to" %} {% for rec in post.private.all %}
                 {{ rec }}{% if not forloop.last %},{% endif %}
                 {% endfor %}
             {% endif %}
 
+        <span class="popup" title="Author">{{ post.user }}</span>
             <span class="timesince">
                 <span class="datetime">{{ post.date|date:"r T" }}<span class="timestamp">{{ post.date|timestamp }}</span></span>
             </span>
