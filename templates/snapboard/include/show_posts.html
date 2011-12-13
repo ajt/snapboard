@@ -78,7 +78,7 @@
             </div>
             {% if post.previous %}
             <div id="post_revision_links{{ post.id }}" class="post_menuleft">
-                <a href="#snap_post_view{{ post.id }}" onclick="revision('{{ post.id }}','{{ post.previous.id }}');">&#171; {% trans "previous" %}</a>
+                <a onclick="revision('{{ post.id }}','{{ post.previous.id }}');">&#171; {% trans "previous" %}</a>
                 <b style="color: #c00">{% trans "This message has been revised" %}</b>
             </div>
 
