@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 version = '.01'
 
 setup(
-    name='django-avatar',
+    name='snapboard',
     version=version,
-    description="django-avatar",
+    description="snapboard",
     long_description="",
     classifiers=[
         "Programming Language :: Python",
